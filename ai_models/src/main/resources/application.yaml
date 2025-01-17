@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: AImodels
+  kafka:
+    bootstrap-servers: localhost:9092
+
+server:
+  port: 8083
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:password@localhost:8761/eureka
+
+logging:
+  level:
+    dev:
+      langchain4j: DEBUG
+      ai4j: DEBUG
+    org: 
+      atmosphere: WARN
+      springframework: INFO
+    github: 
+      langchain4j: DEBUG
+      ai4j: DEBUG
+
+langchain4j:
+  open-ai:
+    chat-model:
+      api-key: ${GITHUB_MODELS_TOKEN}
+      model-name: gpt-4o
+      log-requests: true
+      log-responses: true
+    streaming-chat-model:
+      api-key: ${GITHUB_MODELS_TOKEN}
+      model-name: gpt-4o
+      log-requests: true
+      log-responses: true
+    image-model:
+      api-key: ${GITHUB_MODELS_TOKEN}
+      model-name: dalle-e-2
+      log-requests: true
+      log-responses: true

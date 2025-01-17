@@ -1,0 +1,12 @@
+vaadin-message::part(message){
+  word-break: break-word; 
+  overflow-wrap: break-word; 
+  white-space: normal;
+}
+
+
+.cofrade-gpt-message {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Añade una sombra */
+  padding: 10px; /* Añade un poco de padding para que la sombra sea visible */
+  border-radius: 5px; /* Opcional: añade bordes redondeados */
+}
