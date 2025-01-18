@@ -1,0 +1,14 @@
+vaadin:
+  launch-browser: true
+
+spring:
+  application:
+    name: backoffice
+
+server:
+  port: 8085
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:password@localhost:8761/eureka

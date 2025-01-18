@@ -5,3 +5,5 @@ target/
 docker/data/**
 vaadin_chat/src/main/frontend/**
 vaadin_chat/node_modules/** 
+backoffice/src/main/frontend/**
+backoffice/node_modules/** 

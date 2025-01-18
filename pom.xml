@@ -11,6 +11,7 @@
     <module>discoveryserver</module>
     <module>ai_models</module>
     <module>ai_logs</module>
+    <module>backoffice</module>
   </modules>
   
   <version>1.0-SNAPSHOT</version>
