@@ -1,4 +1,4 @@
-package es.ca.andresmontoro.information.hermandades.infrastructure.controller;
+package es.ca.andresmontoro.backoffice.hermandades.application;
 
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
@@ -25,3 +25,4 @@ public class HermandadResponse {
 
   private LocalDate fundacion;
 }
+

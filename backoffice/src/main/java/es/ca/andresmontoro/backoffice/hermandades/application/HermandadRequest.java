@@ -1,6 +1,7 @@
-package es.ca.andresmontoro.information.hermandades.infrastructure.controller;
+package es.ca.andresmontoro.backoffice.hermandades.application;
 
 import java.time.LocalDate;
+
 import org.hibernate.validator.constraints.Range;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
