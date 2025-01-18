@@ -36,6 +36,11 @@ public class ManageFormacionesMusicalesUseCase implements CrudService<FormacionM
       .orElseThrow(() -> new EntityNotFoundException("FormacionMusical not found"));
   }
 
+  public List<FormacionMusical> findByIds(List<Long> ids) {
+    ids.stream().forEach(ValidationUtils::validateId);
+    return repository.findAllById(ids);
+  }
+
   @Override
   public FormacionMusical update(Long id, FormacionMusical request) {
     FormacionMusical formacionMusical = findById(id);

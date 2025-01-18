@@ -1,6 +1,8 @@
 package es.ca.andresmontoro.information.salidas_procesionales.domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,15 +35,24 @@ public class SalidaProcesional {
   
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  private Long id;  
 
-  @NotNull
-  private LocalDate fecha;
+  @NotNull(message = "La fecha no puede ser nula")
+  private LocalDateTime fechaHoraSalida;
 
-  @NotNull
+  @NotNull(message = "La hora de salida no puede ser nula")
+  private LocalDateTime verdaderaFechaHoraSalida;
+
+  @NotNull(message = "La hora de recogida no puede ser nula")
+  private LocalDateTime fechaHoraRecogida;
+
+  @NotNull(message = "La verdadera fecha de salida no puede ser nula")
+  private LocalDateTime verdaderaFechaHoraRecogida;
+
+  @NotNull(message = "El día de salida no puede ser nulo")
   private DiaSalida diaSalida;
 
-  @NotNull
+  @NotNull(message = "La hermandad no puede ser nula")
   @ManyToOne
   private Hermandad hermandad;
 
@@ -51,5 +62,5 @@ public class SalidaProcesional {
 
   @ManyToMany
   @Builder.Default
-  private List<FormacionMusical> formacionMusical = new ArrayList<>();
+  private List<FormacionMusical> formacionesMusicales = new ArrayList<>();
 }

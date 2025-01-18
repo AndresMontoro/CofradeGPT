@@ -3,5 +3,5 @@ target/
 **/target/
 *.class
 docker/data/**
-vaadin_chat/src/frontend/**
+vaadin_chat/src/main/frontend/**
 vaadin_chat/node_modules/** 
