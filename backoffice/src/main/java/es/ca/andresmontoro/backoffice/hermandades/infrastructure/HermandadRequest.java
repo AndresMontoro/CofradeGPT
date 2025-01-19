@@ -1,4 +1,4 @@
-package es.ca.andresmontoro.backoffice.hermandades.application;
+package es.ca.andresmontoro.backoffice.hermandades.infrastructure;
 
 import java.time.LocalDate;
 
