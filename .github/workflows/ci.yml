@@ -38,29 +38,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Install curl and Maven
+      - name: Install Maven
         run: |
           sudo apt-get update
-          sudo apt-get install -y curl maven
+          sudo apt-get install -y  maven
 
-      # Inicia el servidor Eureka y sigue los logs en tiempo real
-      - name: Start Eureka Server
-        run: |
-          mvn -f discoveryserver/pom.xml spring-boot:run > eureka.log 2>&1 &
-          tail -f eureka.log &
-          echo "Eureka Server logs will be captured in eureka.log."
-
-      - name: Wait for Eureka Server
-        run: |
-          echo "Waiting for Eureka Server to be available..."
-          until curl --silent --fail http://localhost:8761; do
-            echo "Eureka Server is not ready yet. Retrying..."
-            sleep 5
-          done
-          echo "Eureka Server is up and running."
-
-      - name: Print Eureka logs on failure
-        if: failure()
-        run: |
-          echo "Printing Eureka Server logs..."
-          cat eureka.log
+      - name: Build with Maven
+        run: mvn clean install -DskipTests
+  
