@@ -49,16 +49,11 @@ jobs:
       - name: Wait for Eureka Server
         run: |
           echo "Waiting for Eureka Server to be available..."
-          for i in {1..30}; do
-            if curl --silent --fail http://localhost:8761; then
-              echo "Eureka Server is up and running!"
-              exit 0
-            fi
-            echo "Waiting for Eureka Server... ($i/30)"
+          until curl --silent --fail http://localhost:8761; do
+            echo "Eureka Server is not ready yet. Retrying..."
             sleep 5
           done
-          echo "Eureka Server did not start in time."
-          exit 1
+          echo "Eureka Server is up and running!"
 
       - name: Build with Maven and test
         run: mvn clean install
