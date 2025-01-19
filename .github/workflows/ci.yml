@@ -43,7 +43,7 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Install curl
-        run: sudo apt-get update && sudo apt-get install -y curl
+        run: apt-get update && apt-get install -y curl
 
       # Inicia el servidor Eureka
       - name: Start Eureka Server
