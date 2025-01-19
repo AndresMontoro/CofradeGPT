@@ -38,6 +38,28 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      # Inicia el servidor Eureka
+      - name: Start Eureka Server
+        run: |
+          mvn -f eureka-server/pom.xml spring-boot:run &
+        env:
+          SERVER_PORT: 8761 # Configura el puerto si es diferente al predeterminado
+
+      # Verifica que el servidor Eureka esté corriendo
+      - name: Wait for Eureka Server
+        run: |
+          echo "Waiting for Eureka Server to be available..."
+          for i in {1..30}; do
+            if curl --silent --fail http://localhost:8761; then
+              echo "Eureka Server is up and running!"
+              exit 0
+            fi
+            echo "Waiting for Eureka Server... ($i/30)"
+            sleep 5
+          done
+          echo "Eureka Server did not start in time."
+          exit 1
+
       - name: Build with Maven and test
         run: mvn clean install
 
