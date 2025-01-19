@@ -41,7 +41,7 @@ jobs:
       # Inicia el servidor Eureka
       - name: Start Eureka Server
         run: |
-          mvn -f eureka-server/pom.xml spring-boot:run &
+          mvn -f discoveryserver/pom.xml spring-boot:run &
         env:
           SERVER_PORT: 8761 # Configura el puerto si es diferente al predeterminado
 
