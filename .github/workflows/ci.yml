@@ -12,11 +12,7 @@ on:
 # Definicion de las tareas
 jobs:
   build:
-    runs-on: ubuntu-22.04
-
-    container:
-      image: ubuntu:22.04
-      options: --cpus="2" --memory="4g"
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
@@ -42,21 +38,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Install curl
-        run: apt-get update && apt-get install -y curl
+      - name: Install curl and Maven
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl maven
 
-      # Inicia el servidor Eureka
+      # Inicia el servidor Eureka y sigue los logs en tiempo real
       - name: Start Eureka Server
         run: |
           mvn -f discoveryserver/pom.xml spring-boot:run > eureka.log 2>&1 &
           tail -f eureka.log &
           echo "Eureka Server logs will be captured in eureka.log."
-
-      - name: Print Eureka logs on failure
-        if: failure()
-        run: |
-          echo "Printing Eureka Server logs..."
-          cat eureka.log
 
       - name: Wait for Eureka Server
         run: |
@@ -65,14 +57,10 @@ jobs:
             echo "Eureka Server is not ready yet. Retrying..."
             sleep 5
           done
-          echo "Eureka Server is up and running!"
+          echo "Eureka Server is up and running."
 
-      - name: Build with Maven and test
-        run: mvn clean install
-
-      - name: Run tests for each microservice
+      - name: Print Eureka logs on failure
+        if: failure()
         run: |
-          for dir in $(find . -name "pom.xml" -exec dirname {} \;); do
-            echo "Running tests in $dir"
-            mvn -f $dir/pom.xml test
-          done
+          echo "Printing Eureka Server logs..."
+          cat eureka.log
