@@ -1,0 +1,43 @@
+name: CI Pipeline
+
+# Disparadores
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+# Definicion de las tareas
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'temurin'
+
+      - name: Configuracion cache de maven
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Build with Maven and test
+        run: mvn clean install
+
+      - name: Run tests for each microservice
+        run: |
+          for dir in $(find . -name "pom.xml" -exec dirname {} \;); do
+            echo "Running tests in $dir"
+            mvn -f $dir/pom.xml test
+          done
