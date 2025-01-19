@@ -18,6 +18,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Set up environment
+        env: 
+          AI_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
+        run: |
+          echo "AI_MODELS_TOKEN is set"
+
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:

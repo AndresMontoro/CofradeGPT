@@ -27,17 +27,17 @@ logging:
 langchain4j:
   open-ai:
     chat-model:
-      api-key: ${GITHUB_MODELS_TOKEN}
+      api-key: ${AI_MODELS_TOKEN}
       model-name: gpt-4o
       log-requests: true
       log-responses: true
     streaming-chat-model:
-      api-key: ${GITHUB_MODELS_TOKEN}
+      api-key: ${AI_MODELS_TOKEN}
       model-name: gpt-4o
       log-requests: true
       log-responses: true
     image-model:
-      api-key: ${GITHUB_MODELS_TOKEN}
+      api-key: ${AI_MODELS_TOKEN}
       model-name: dalle-e-2
       log-requests: true
       log-responses: true
