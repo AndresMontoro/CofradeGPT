@@ -57,7 +57,6 @@ jobs:
           echo "Printing Eureka Server logs..."
           cat eureka.log
 
-      # Verifica que el servidor Eureka esté corriendo
       - name: Wait for Eureka Server
         run: |
           echo "Waiting for Eureka Server to be available..."
