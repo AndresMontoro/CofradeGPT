@@ -42,6 +42,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      - name: Install curl
+        run: sudo apt-get update && sudo apt-get install -y curl
+
+
       # Inicia el servidor Eureka
       - name: Start Eureka Server
         run: |
