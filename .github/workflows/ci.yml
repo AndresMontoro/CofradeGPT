@@ -49,6 +49,7 @@ jobs:
       - name: Start Eureka Server
         run: |
           mvn -f discoveryserver/pom.xml spring-boot:run > eureka.log 2>&1 &
+          tail -f eureka.log &
           echo "Eureka Server logs will be captured in eureka.log."
 
       - name: Print Eureka logs on failure
