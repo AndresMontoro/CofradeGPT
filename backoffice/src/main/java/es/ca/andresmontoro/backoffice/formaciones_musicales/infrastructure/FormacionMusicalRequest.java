@@ -1,15 +1,9 @@
-package es.ca.andresmontoro.information.formaciones_musicales.domain;
+package es.ca.andresmontoro.backoffice.formaciones_musicales.infrastructure;
 
 import java.time.LocalDate;
 
-import es.ca.andresmontoro.information.localidades.domain.Ciudad;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import org.hibernate.validator.constraints.Range;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -22,19 +16,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Builder
 @EqualsAndHashCode
-public class FormacionMusical {
+public class FormacionMusicalRequest {
   
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-
   @NotNull(message = "El nombre no puede ser nulo")
   @NotEmpty(message = "El nombre no puede estar vacío")
   @NotBlank(message = "El nombre no puede estar en blanco")
@@ -47,10 +36,9 @@ public class FormacionMusical {
   private LocalDate fechaFundacion;
 
   @NotNull(message = "El estilo no puede ser nulo")
-  @Enumerated(EnumType.STRING)
   private EstiloFormacion estilo;
   
-  @ManyToOne
   @NotNull(message = "La ciudad no puede ser nula")
-  private Ciudad ciudad;
+  @Range(min = 1, message = "El id de la ciudad no puede ser menor que 1")
+  private Long idCiudad;
 }

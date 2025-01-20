@@ -6,9 +6,10 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.Route;
 
+import es.ca.andresmontoro.backoffice.Layout;
 import es.ca.andresmontoro.backoffice.hermandades.application.ManageHermandadesUseCase;
 
-@Route("hermandades")
+@Route(value = "hermandades", layout = Layout.class)
 public class HermandadesView extends VerticalLayout{
 
   private final ManageHermandadesUseCase manageHermandadesUseCase;
