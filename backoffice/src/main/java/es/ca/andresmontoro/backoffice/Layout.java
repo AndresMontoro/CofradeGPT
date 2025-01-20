@@ -35,8 +35,11 @@ public class Layout extends AppLayout {
         VaadinIcon.DASHBOARD.create()),
       new SideNavItem(
         "Formaciones Musicales", "/formaciones-musicales", 
-        VaadinIcon.CART.create()
-    ));
+        VaadinIcon.CART.create()),
+        new SideNavItem(
+          "Comunidades Autonomas", "/comunidades", 
+          VaadinIcon.CART.create())
+    );
       
     return sideNav;
   }
