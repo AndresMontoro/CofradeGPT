@@ -10,6 +10,7 @@ public class ProvinciaMapper {
       .id(provincia.getId())
       .nombre(provincia.getNombre())
       .comunidadAutonomaId(provincia.getComunidadAutonoma().getId())
+      .comunidadAutonomaNombre(provincia.getComunidadAutonoma().getNombre())
       .build();
   }
 

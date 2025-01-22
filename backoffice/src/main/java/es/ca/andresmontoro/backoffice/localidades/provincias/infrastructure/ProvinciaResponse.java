@@ -18,5 +18,7 @@ public class ProvinciaResponse {
   private String nombre;
 
   private Long comunidadAutonomaId;
+
+  private String comunidadAutonomaNombre;
 }
 
