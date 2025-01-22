@@ -1,4 +1,4 @@
-package es.ca.andresmontoro.information.localidades.infrastructure.controller;
+package es.ca.andresmontoro.backoffice.localidades.ciudades.infrastructure;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

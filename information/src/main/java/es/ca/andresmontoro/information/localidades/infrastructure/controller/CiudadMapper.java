@@ -10,6 +10,7 @@ public class CiudadMapper {
       .id(ciudad.getId())
       .nombre(ciudad.getNombre())
       .provinciaId(ciudad.getProvincia().getId())
+      .provinciaNombre(ciudad.getProvincia().getNombre())
       .build();
   }
 

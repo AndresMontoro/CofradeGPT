@@ -1,4 +1,4 @@
-package es.ca.andresmontoro.backoffice.localidades.provincias.infrastructure;
+package es.ca.andresmontoro.backoffice.localidades.ciudades.infrastructure;
 
 import java.util.List;
 
@@ -7,15 +7,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
-public class ProvinciaApiCalls {
-  private static final String baseUri = "http://information/chatcofrade/informacion/provincia";
+public class CiudadApiCalls {
+  
+  private static final String baseUri = "http://information/chatcofrade/informacion/ciudad";
   private WebClient webClient;
 
-  public ProvinciaApiCalls(WebClient.Builder webClientBuilder) {
+  public CiudadApiCalls(WebClient.Builder webClientBuilder) {
     this.webClient = webClientBuilder.baseUrl(baseUri).build();
   }
 
-  public ProvinciaResponse create(ProvinciaRequest dto) {
+  public CiudadResponse create(CiudadRequest dto) {
     return this.webClient.post()
       .uri(baseUri)
       .bodyValue(dto)
@@ -23,34 +24,34 @@ public class ProvinciaApiCalls {
       .onStatus(
         HttpStatusCode::isError,
         response -> response.bodyToMono(String.class).map(Exception::new))
-      .bodyToMono(ProvinciaResponse.class)
+      .bodyToMono(CiudadResponse.class)
       .block();
   }
 
-  public List<ProvinciaResponse> findAll() {
+  public List<CiudadResponse> findAll() {
     return this.webClient.get()
       .uri(baseUri)
       .retrieve()
       .onStatus(
         HttpStatusCode::isError,
         response -> response.bodyToMono(String.class).map(Exception::new))
-      .bodyToFlux(ProvinciaResponse.class)
+      .bodyToFlux(CiudadResponse.class)
       .collectList()
       .block();
   }
 
-  public ProvinciaResponse findById(Long id) {
+  public CiudadResponse findById(Long id) {
     return this.webClient.get()
       .uri(baseUri + "/" + id)
       .retrieve()
       .onStatus(
         HttpStatusCode::isError,
         response -> response.bodyToMono(String.class).map(Exception::new))
-      .bodyToMono(ProvinciaResponse.class)
+      .bodyToMono(CiudadResponse.class)
       .block();
   }
 
-  public ProvinciaResponse update(Long id, ProvinciaRequest dto) {
+  public CiudadResponse update(Long id, CiudadRequest dto) {
     return this.webClient.put()
       .uri(baseUri + "/" + id)
       .bodyValue(dto)
@@ -58,18 +59,18 @@ public class ProvinciaApiCalls {
       .onStatus(
         HttpStatusCode::isError,
         response -> response.bodyToMono(String.class).map(Exception::new))
-      .bodyToMono(ProvinciaResponse.class)
+      .bodyToMono(CiudadResponse.class)
       .block();
   }
 
-  public ProvinciaResponse deleteById(Long id) {
+  public CiudadResponse deleteById(Long id) {
     return this.webClient.delete()
       .uri(baseUri + "/" + id)
       .retrieve()
       .onStatus(
         HttpStatusCode::isError,
         response -> response.bodyToMono(String.class).map(Exception::new))
-      .bodyToMono(ProvinciaResponse.class)
+      .bodyToMono(CiudadResponse.class)
       .block();
   }
 }

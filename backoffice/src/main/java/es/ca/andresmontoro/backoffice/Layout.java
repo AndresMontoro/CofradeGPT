@@ -41,6 +41,9 @@ public class Layout extends AppLayout {
         VaadinIcon.CART.create()),
       new SideNavItem(
         "Provincias", "/provincias", 
+        VaadinIcon.CART.create()),
+      new SideNavItem(
+        "Ciudades", "/ciudades", 
         VaadinIcon.CART.create())
     );
       

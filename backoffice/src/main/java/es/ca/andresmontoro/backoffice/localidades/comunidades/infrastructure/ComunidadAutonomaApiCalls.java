@@ -11,6 +11,10 @@ public class ComunidadAutonomaApiCalls {
   private static final String baseUri = "http://information/chatcofrade/informacion/comunidad";
   private WebClient webClient;
 
+  public ComunidadAutonomaApiCalls(WebClient.Builder webClientBuilder) {
+    this.webClient = webClientBuilder.baseUrl(baseUri).build();
+  }
+
   public ComunidadAutonomaResponse create(ComunidadAutonomaRequest dto) {
     return this.webClient.post()
       .uri(baseUri)
