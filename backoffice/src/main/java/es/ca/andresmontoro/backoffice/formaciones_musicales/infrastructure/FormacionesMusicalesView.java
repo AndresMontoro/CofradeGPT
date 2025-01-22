@@ -1,6 +1,8 @@
 package es.ca.andresmontoro.backoffice.formaciones_musicales.infrastructure;
 
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
@@ -30,17 +32,37 @@ public class FormacionesMusicalesView extends VerticalLayout {
 
   private void configureCrud(GridCrud<FormacionMusicalResponse> crud) {
     crud.getCrudFormFactory().setUseBeanValidation(true);
-    crud.getCrudFormFactory().setVisibleProperties("nombre", "fechaFundacion", "estilo", "nombreCiudad");
+    crud.getCrudFormFactory().setVisibleProperties("nombre", "fechaFundacion", "estilo", "idCiudad");
     crud.getCrudFormFactory().setFieldCaptions("Nombre", "Fecha de Fundación", "Estilo", "Ciudad");
 
-    crud.getCrudFormFactory().setFieldProvider("nombreCiudad", field -> createCiudadComboBox());
+    crud.getCrudFormFactory().setFieldProvider("idCiudad", field -> createCiudadComboBox());
 
     configureGrid(crud);
 
     crud.setFindAllOperation(() -> manageFormacionesMusicalesUseCase.findAll());
-    crud.setAddOperation(this.manageFormacionesMusicalesUseCase::create);
-    crud.setUpdateOperation(this.manageFormacionesMusicalesUseCase::update);
-    crud.setDeleteOperation(this.manageFormacionesMusicalesUseCase::delete);
+    crud.setAddOperation(formacion -> {
+      try {
+        return manageFormacionesMusicalesUseCase.create(formacion);
+      } catch (Exception e) {
+        showErrorNotification("Error al agregar la formación musical: " + e.getMessage());
+        return null;
+      }
+    });
+    crud.setUpdateOperation(formacion -> {
+      try {
+        return manageFormacionesMusicalesUseCase.update(formacion);
+      } catch (Exception e) {
+        showErrorNotification("Error al actualizar la formación musical: " + e.getMessage());
+        return null;
+      }
+    });
+    crud.setDeleteOperation(formacion -> {
+      try {
+        manageFormacionesMusicalesUseCase.delete(formacion);
+      } catch (Exception e) {
+        showErrorNotification("Error al eliminar la formación musical: " + e.getMessage());
+      }
+    });
   }
 
   private ComboBox<String> createCiudadComboBox() {
@@ -73,5 +95,10 @@ public class FormacionesMusicalesView extends VerticalLayout {
     crud.getGrid().getColumnByKey("fechaFundacion").setHeader("Fecha de Fundación");
     crud.getGrid().getColumnByKey("estilo").setHeader("Estilo");
     crud.getGrid().getColumnByKey("nombreCiudad").setHeader("Ciudad");
+  }
+
+  private void showErrorNotification(String message) {
+    Notification notification = new Notification(message, 3000, Position.MIDDLE);
+    notification.open();
   }
 }

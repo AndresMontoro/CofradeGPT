@@ -19,6 +19,7 @@ public class SalidaProcesionalMapper {
       .verdaderaFechaHoraRecogida(salidaProcesional.getVerdaderaFechaHoraRecogida())
       .diaSalida(salidaProcesional.getDiaSalida())
       .idHermandad(salidaProcesional.getHermandad().getId())
+      .nombreHermandad(salidaProcesional.getHermandad().getNombre())
       .numeroNazarenos(salidaProcesional.getNumeroNazarenos())
       .idFormacionesMusicales(salidaProcesional.getFormacionesMusicales()
         .stream().map(FormacionMusical::getId).collect(Collectors.toList())

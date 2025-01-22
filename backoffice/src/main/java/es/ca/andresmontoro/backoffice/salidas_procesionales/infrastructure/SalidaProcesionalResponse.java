@@ -1,10 +1,8 @@
-package es.ca.andresmontoro.information.salidas_procesionales.infrastructure.controller;
+package es.ca.andresmontoro.backoffice.salidas_procesionales.infrastructure;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import es.ca.andresmontoro.information.salidas_procesionales.domain.DiaSalida;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -41,3 +39,4 @@ public class SalidaProcesionalResponse {
   @Builder.Default
   private List<Long> idFormacionesMusicales = new ArrayList<>();
 }
+

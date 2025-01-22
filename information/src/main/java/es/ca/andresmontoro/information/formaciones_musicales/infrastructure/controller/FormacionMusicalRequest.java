@@ -34,14 +34,11 @@ public class FormacionMusicalRequest {
 
   @NotNull(message = "La fecha de fundación no puede ser nula")
   @PastOrPresent(message = "La fecha de fundación no puede ser futura")
-  @NotNull(message = "La fecha de fundación no puede ser nula")
   private LocalDate fechaFundacion;
 
-  @ManyToOne
   @NotNull(message = "El estilo no puede ser nulo")
   private EstiloFormacion estilo;
   
-  @ManyToOne
   @NotNull(message = "La ciudad no puede ser nula")
   @Range(min = 1, message = "El id de la ciudad no puede ser menor que 1")
   private Long idCiudad;

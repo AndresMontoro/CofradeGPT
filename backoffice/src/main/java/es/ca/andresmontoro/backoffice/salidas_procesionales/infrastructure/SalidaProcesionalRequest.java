@@ -1,10 +1,12 @@
-package es.ca.andresmontoro.information.salidas_procesionales.infrastructure.controller;
+package es.ca.andresmontoro.backoffice.salidas_procesionales.infrastructure;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.ca.andresmontoro.information.salidas_procesionales.domain.DiaSalida;
+import org.hibernate.validator.constraints.Range;
+
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -18,26 +20,33 @@ import lombok.Setter;
 @Setter
 @Builder
 @EqualsAndHashCode
-public class SalidaProcesionalResponse {
-  
-  private Long id;
+public class SalidaProcesionalRequest {
 
+  @NotNull
   private LocalDateTime fechaHoraSalida;
-  
+
+  @NotNull
   private LocalDateTime verdaderaFechaHoraSalida;
 
+  @NotNull
   private LocalDateTime fechaHoraRecogida;
 
+  @NotNull
   private LocalDateTime verdaderaFechaHoraRecogida;
 
+  @NotNull
   private DiaSalida diaSalida;
 
+  @NotNull
+  @Range(min = 1, message = "El id de la hermandad no puede ser menor que 1")
   private Long idHermandad;
 
-  private String nombreHermandad;
-
+  @NotNull
+  @Range(min = 0, message = "El número de nazarenos debe ser positivo")
   private Integer numeroNazarenos;
 
   @Builder.Default
+  @NotNull
   private List<Long> idFormacionesMusicales = new ArrayList<>();
 }
+
