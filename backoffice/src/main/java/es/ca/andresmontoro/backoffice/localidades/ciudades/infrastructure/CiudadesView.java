@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.vaadin.crudui.crud.impl.GridCrud;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import es.ca.andresmontoro.backoffice.Layout;
@@ -38,9 +40,29 @@ public class CiudadesView extends VerticalLayout {
     configureGrid(crud);
     
     crud.setFindAllOperation(() -> manageCiudadesUseCase.findAll());
-    crud.setAddOperation(this.manageCiudadesUseCase::create);
-    crud.setUpdateOperation(this.manageCiudadesUseCase::update);
-    crud.setDeleteOperation(this.manageCiudadesUseCase::delete);
+    crud.setAddOperation(ciudad -> {
+      try {
+        return manageCiudadesUseCase.create(ciudad);
+      } catch (Exception e) {
+        showErrorNotification("Error al agregar la formación musical: " + e.getMessage());
+        return null;
+      }
+    });
+    crud.setUpdateOperation(ciudad -> {
+      try {
+        return manageCiudadesUseCase.update(ciudad);
+      } catch (Exception e) {
+        showErrorNotification("Error al actualizar la formación musical: " + e.getMessage());
+        return null;
+      }
+    });
+    crud.setDeleteOperation(ciudad -> {
+      try {
+        manageCiudadesUseCase.delete(ciudad);
+      } catch (Exception e) {
+        showErrorNotification("Error al eliminar la formación musical: " + e.getMessage());
+      }
+    });
   }
 
   private ComboBox<String> createProvinciaComboBox() {
@@ -72,5 +94,10 @@ public class CiudadesView extends VerticalLayout {
     crud.getGrid().getColumnByKey("id").setHeader("ID");
     crud.getGrid().getColumnByKey("nombre").setHeader("Nombre");
     crud.getGrid().getColumnByKey("provinciaNombre").setHeader("Nombre Provincia");
+  }
+
+  private void showErrorNotification(String message) {
+    Notification notification = new Notification(message, 3000, Position.MIDDLE);
+    notification.open();
   }
 }
