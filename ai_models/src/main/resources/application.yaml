@@ -1,3 +1,5 @@
+githubToken: ${AI_MODELS_TOKEN}
+
 spring:
   application:
     name: AImodels

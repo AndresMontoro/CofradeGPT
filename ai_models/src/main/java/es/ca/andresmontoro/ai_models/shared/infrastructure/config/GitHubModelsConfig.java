@@ -8,7 +8,7 @@ import dev.langchain4j.model.github.GitHubModelsChatModel;
 
 @Configuration
 public class GitHubModelsConfig {
-  @Value("{langchain4j.open-ai.chat-model.api-key}")
+  @Value("${githubToken}")
   private String githubModels;
 
   @Bean

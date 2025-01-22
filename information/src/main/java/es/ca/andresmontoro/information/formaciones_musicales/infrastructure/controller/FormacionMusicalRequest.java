@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import org.hibernate.validator.constraints.Range;
 
 import es.ca.andresmontoro.information.formaciones_musicales.domain.EstiloFormacion;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

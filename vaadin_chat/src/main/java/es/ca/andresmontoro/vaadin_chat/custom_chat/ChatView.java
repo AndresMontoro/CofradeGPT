@@ -44,10 +44,11 @@ public class ChatView extends VerticalLayout {
   }
 
   private void handleMessageSubmit(MessageInput.SubmitEvent event) {
-    addMessageToChat(event.getValue(), "Tú");
+    String prompt = event.getValue();
+    addMessageToChat(prompt, "Tú");
 
     try {
-      String responseFromAi = informationFinderApiCalls.sendPrompt(event.getValue());
+      String responseFromAi = informationFinderApiCalls.sendPrompt(prompt);
       addMessageToChat(responseFromAi, AI_NAME);
     } catch (Exception e) {
       addMessageToChat("Lo siento, no puedo contestar eso.", AI_NAME);
