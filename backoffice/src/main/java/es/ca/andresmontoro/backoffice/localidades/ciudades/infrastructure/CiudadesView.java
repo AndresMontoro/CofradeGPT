@@ -52,8 +52,8 @@ public class CiudadesView extends VerticalLayout {
 
     // Configurar el ComboBox
     comboBox.setItems(provincias.stream()
-        .map(provincia -> String.valueOf(provincia.getId()))
-        .toList());
+      .map(provincia -> String.valueOf(provincia.getId()))
+      .toList());
     comboBox.setItemLabelGenerator(id -> generateProvinciaLabel(id, provincias));
 
     return comboBox;

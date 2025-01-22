@@ -26,4 +26,6 @@ public class FormacionMusicalResponse {
   private EstiloFormacion estilo;
 
   private Long idCiudad;
+
+  private String nombreCiudad;
 }

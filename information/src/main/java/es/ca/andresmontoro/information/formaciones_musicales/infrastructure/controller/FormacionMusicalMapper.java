@@ -11,6 +11,7 @@ public class FormacionMusicalMapper {
       .fechaFundacion(formacionMusical.getFechaFundacion())
       .estilo(formacionMusical.getEstilo())
       .idCiudad(formacionMusical.getCiudad().getId())
+      .nombreCiudad(formacionMusical.getCiudad().getNombre())
       .build();
   }
 
