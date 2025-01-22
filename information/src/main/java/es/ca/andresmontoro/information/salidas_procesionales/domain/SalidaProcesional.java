@@ -38,13 +38,11 @@ public class SalidaProcesional {
   @NotNull(message = "La fecha no puede ser nula")
   private LocalDateTime fechaHoraSalida;
 
-  @NotNull(message = "La hora de salida no puede ser nula")
   private LocalDateTime verdaderaFechaHoraSalida;
 
   @NotNull(message = "La hora de recogida no puede ser nula")
   private LocalDateTime fechaHoraRecogida;
 
-  @NotNull(message = "La verdadera fecha de salida no puede ser nula")
   private LocalDateTime verdaderaFechaHoraRecogida;
 
   @NotNull(message = "El día de salida no puede ser nulo")
@@ -54,7 +52,7 @@ public class SalidaProcesional {
   @ManyToOne
   private Hermandad hermandad;
 
-  @NotNull
+  @NotNull(message = "El número de nazarenos no puede ser nulo")
   @Range(min = 0, message = "El número de nazarenos debe ser positivo")
   private Integer numeroNazarenos;
 

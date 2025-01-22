@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
@@ -47,15 +48,16 @@ public class Hermandad {
   // @NoSpecialCharacters
   private String nombre;
 
-  @NotNull
-  @NotEmpty
+  @NotNull(message = "La historia no puede ser nula")
+  @NotEmpty(message = "La historia no puede estar vacía")
+  @NotBlank(message = "La historia no puede estar en blanco")
   private String historia;
 
-  @NotNull
-  @Range(min = 0)
+  @NotNull(message = "El número de hermanos no puede ser nulo")
+  @Range(min = 0, message = "El número de hermanos no puede ser negativo")
   private Integer numeroHermanos;
 
-  @NotNull
-  @PastOrPresent
+  @NotNull(message = "La fecha de fundación no puede ser nula")
+  @PastOrPresent(message = "La fecha de fundación no puede ser futura")
   private LocalDate fundacion;
 }
