@@ -5,6 +5,8 @@ import java.util.List;
 import org.vaadin.crudui.crud.impl.GridCrud;
 
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
@@ -39,9 +41,29 @@ public class ProvinciasView extends VerticalLayout {
     configureGrid(crud);
     
     crud.setFindAllOperation(() -> manageProvinciasUseCase.findAll());
-    crud.setAddOperation(this.manageProvinciasUseCase::create);
-    crud.setUpdateOperation(this.manageProvinciasUseCase::update);
-    crud.setDeleteOperation(this.manageProvinciasUseCase::delete);
+    crud.setAddOperation(provincia -> {
+      try {
+        return manageProvinciasUseCase.create(provincia);
+      } catch (Exception e) {
+        showErrorNotification("Error al agregar la formación musical: " + e.getMessage());
+        return null;
+      }
+    });
+    crud.setUpdateOperation(provincia -> {
+      try {
+        return manageProvinciasUseCase.update(provincia);
+      } catch (Exception e) {
+        showErrorNotification("Error al actualizar la formación musical: " + e.getMessage());
+        return null;
+      }
+    });
+    crud.setDeleteOperation(provincia -> {
+      try {
+        manageProvinciasUseCase.delete(provincia);
+      } catch (Exception e) {
+        showErrorNotification("Error al eliminar la formación musical: " + e.getMessage());
+      }
+    });
   }
 
   private ComboBox<String> createComunidadComboBox() {
@@ -74,4 +96,8 @@ public class ProvinciasView extends VerticalLayout {
     crud.getGrid().getColumnByKey("comunidadAutonomaNombre").setHeader("Comunidad Autonoma");
   }
 
+  private void showErrorNotification(String message) {
+    Notification notification = new Notification(message, 3000, Position.MIDDLE);
+    notification.open();
+  }
 }
