@@ -4,6 +4,23 @@ vaadin:
 spring:
   application:
     name: backoffice
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: cofrade-gpt
+            client-secret: GENGXarFH1titMk52zZZyawK8bJUzRiU
+            scope: profile,openid,email,roles
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8181/realms/CofradeGPT
+
+# vaadin:
+#   sso:
+#     login-route: /oauth2/authorization/keycloak
+#     back-channel-logout: true
+
 
 server:
   port: 8085
@@ -12,3 +29,4 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://eureka:password@localhost:8761/eureka
+

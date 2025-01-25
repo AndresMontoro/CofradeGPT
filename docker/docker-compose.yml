@@ -61,4 +61,44 @@ services:
       - ./data/sslogs:/var/lib/postgresql/data
     depends_on:
       - adminer
+
+  keycloak:
+    image: bitnami/keycloak:26.0.0
+    restart: on-failure
+    container_name: keycloak
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KEYCLOAK_HTTP_PORT: 8181
+      KEYCLOAK_HOSTNAME: localhost
+      KEYCLOAK_ENABLE_HTTPS: false
+      KEYCLOAK_HOSTNAME_STRICT: false
+      KEYCLOAK_ENABLE_HEALTH_ENDPOINTS: false
+      KEYCLOAK_DATABASE_HOST: db_keycloak
+    ports:
+      - 8181:8181
+    volumes:
+      - ./data/keycloak:/docker-entrypoint-initdb.d
+    depends_on:
+      - db_keycloak
+    networks:
+      - keycloak_network
+
+  db_keycloak:
+    image: docker.io/bitnami/postgresql:latest
+    container_name: db_keycloak
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - POSTGRESQL_USERNAME=bn_keycloak
+      - POSTGRESQL_DATABASE=bitnami_keycloak
+    ports:
+      - 5434:5432
+    volumes:
+      - ./data/keycloak_db:/bitnami/postgresql
+    networks:
+      - keycloak_network
+
+networks:
+  keycloak_network:
+    driver: bridge
     
