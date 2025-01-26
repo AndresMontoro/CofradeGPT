@@ -1,27 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-chat',
+  selector: 'chat-component',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css'],
-  imports: [],
-  standalone: true
+  styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit {
-
-  messages: { text: string, reply: boolean, date: Date }[] = [];
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-  sendMessage(event: any) {
-    this.messages.push({
-      text: event.message,
-      reply: false,
-      date: new Date()
-    });
-  }
-
+export class ChatComponent {
 }
