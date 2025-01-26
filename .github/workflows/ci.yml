@@ -44,5 +44,6 @@ jobs:
           sudo apt-get install -y  maven
 
       - name: Build with Maven
+        working-directory: backend
         run: mvn clean install -DskipTests
   
