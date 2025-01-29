@@ -1,0 +1,17 @@
+<nb-chat title="CofradeGPT" size="medium" status="info">
+
+  @for (message of messages; track $index) {
+    <nb-chat-message
+      message="{{ message.message }}"
+      type="{{ message.type }}"
+      status="info"
+      sender="{{ message.sender }}" 
+      [reply]="message.reply"
+    ></nb-chat-message>
+  }
+
+  <!-- Input para enviar mensajes -->
+  <nb-chat-form (send)="sendMessage($event)" [dropFiles]="false">
+  </nb-chat-form>
+  
+</nb-chat>

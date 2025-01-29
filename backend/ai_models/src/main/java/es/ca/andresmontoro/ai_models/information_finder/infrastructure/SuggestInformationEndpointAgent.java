@@ -15,6 +15,7 @@ public interface SuggestInformationEndpointAgent {
         - Consulta los endpoints disponibles en la documentación proporcionada.
         - No asumas ni inventes endpoints que no estén explícitamente definidos en la documentación.
         - Si el dato solicitado no está disponible directamente en un endpoint, selecciona el endpoint más cercano que permita obtener la información básica para procesar la respuesta.
+        - Basate en sinonimos. Por ejemplo, si el prompt meciona "banda o formacion musical" tal vez el prompt podria ser formacion-musical ya que es el unico disponible que significa lo mismo.
 
     2. **Valida el prompt**:
         - Si el prompt del usuario no proporciona suficiente información para determinar un endpoint, devuelve `apiEndPoint` como vacío (`""`) y establece `needMoreInformation` como `false`.
