@@ -17,49 +17,38 @@ export class ChatComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // Add little delay
     setTimeout(() => {
-      this.addWelcomeMessage();
+      this.addMessageToChat(
+        '¡Hola! Soy CofradeGPT. ¿En qué puedo ayudarte?',
+        'CofradeGPT', false
+      );
     }, 1500);
-    
-  }
-
-  addWelcomeMessage() {
-    this.messages.push({
-      message: 'Hola, soy CofradeGPT. ¿En qué puedo ayudarte?',
-      type: 'text',
-      sender: 'CofradeGPT',
-      reply: false
-    });
   }
 
   sendMessage(event: any) {
     const receivedMessage = event.message;
-    this.messages.push({
-      message: receivedMessage,
-      type: 'text',
-      sender: 'You',
-      reply: true
-    });
+    this.addMessageToChat(receivedMessage, 'User', true);
     
     this.aiApiCallService.sendMessage(receivedMessage).subscribe({
       next: (response) => {
-        this.messages.push({
-          message: response,
-          type: 'text',
-          sender: 'CofradeGPT',
-          reply: false
-        });
+        this.addMessageToChat(response, 'CofradeGPT', false);
       },
       error: (error) => {
         console.error('Error:', error);
-        this.messages.push({
-          message: 'Lo siento, no pude entender tu mensaje. ¿Podrías intentar de nuevo?',
-          type: 'text',
-          sender: 'CofradeGPT',
-          reply: false
-        });
+        this.addMessageToChat(
+          'Lo siento, no he podido entender tu mensaje.', 
+          'CofradeGPT', false
+        );
       }
+    });
+  }
+
+  addMessageToChat(message: string, sender: string, reply: boolean) {
+    this.messages.push({
+      message: message,
+      type: 'text',
+      sender: sender,
+      reply: reply
     });
   }
 }

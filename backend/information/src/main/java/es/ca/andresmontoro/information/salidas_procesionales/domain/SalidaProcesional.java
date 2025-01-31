@@ -1,8 +1,8 @@
 package es.ca.andresmontoro.information.salidas_procesionales.domain;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.hibernate.validator.constraints.Range;
 
@@ -58,5 +58,5 @@ public class SalidaProcesional {
 
   @ManyToMany
   @Builder.Default
-  private List<FormacionMusical> formacionesMusicales = new ArrayList<>();
+  private Set<FormacionMusical> formacionesMusicales = new HashSet<>();
 }

@@ -1,9 +1,11 @@
 package es.ca.andresmontoro.information.salidas_procesionales.application;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
+import es.ca.andresmontoro.information.formaciones_musicales.domain.FormacionMusical;
 import es.ca.andresmontoro.information.salidas_procesionales.domain.SalidaProcesional;
 import es.ca.andresmontoro.information.salidas_procesionales.infrastructure.SalidaProcesionalRepository;
 import es.ca.andresmontoro.information.shared.application.CrudService;
@@ -62,5 +64,10 @@ public class ManageSalidasProcesionalesUseCase implements CrudService<SalidaProc
     SalidaProcesional salidaProcesional = findById(id);
     repository.delete(salidaProcesional);
     return salidaProcesional;
+  }
+
+  public Set<FormacionMusical> findFormacionesByIdSalida(Long idSalida) {
+    SalidaProcesional salidaProcesional = findById(idSalida);
+    return salidaProcesional.getFormacionesMusicales();
   }
 }

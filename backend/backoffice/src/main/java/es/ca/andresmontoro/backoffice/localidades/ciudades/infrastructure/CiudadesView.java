@@ -83,10 +83,10 @@ public class CiudadesView extends VerticalLayout {
 
   private String generateProvinciaLabel(String id, List<ProvinciaResponse> provincias) {
     return provincias.stream()
-        .filter(p -> String.valueOf(p.getId()).equals(id))
-        .map(p -> p.getNombre() + " (ID: " + p.getId() + ")")
-        .findFirst()
-        .orElse(id);
+      .filter(p -> String.valueOf(p.getId()).equals(id))
+      .map(p -> p.getNombre() + " (ID: " + p.getId() + ")")
+      .findFirst()
+      .orElse(id);
   }
 
   private void configureGrid(GridCrud<CiudadResponse> crud) {

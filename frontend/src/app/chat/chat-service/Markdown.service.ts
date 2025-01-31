@@ -7,11 +7,11 @@ import { marked } from 'marked';
 })
 export class MarkdownService {
 
-constructor(private sanitizer: DomSanitizer) { }
+  constructor(private sanitizer: DomSanitizer) { }
 
-convertToHtml(markdown: string): SafeHtml {
-  const html = marked(markdown);
-  const safeHtml = this.sanitizer.bypassSecurityTrustHtml(html.toString());
-  return safeHtml;
-}
+  convertToHtml(markdown: string): SafeHtml {
+    const html = marked(markdown);
+    const safeHtml = this.sanitizer.bypassSecurityTrustHtml(html.toString());
+    return safeHtml;
+  }
 }

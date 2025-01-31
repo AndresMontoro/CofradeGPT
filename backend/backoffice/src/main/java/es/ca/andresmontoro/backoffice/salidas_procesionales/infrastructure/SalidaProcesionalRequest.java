@@ -1,8 +1,8 @@
 package es.ca.andresmontoro.backoffice.salidas_procesionales.infrastructure;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.hibernate.validator.constraints.Range;
 
@@ -47,6 +47,6 @@ public class SalidaProcesionalRequest {
 
   @Builder.Default
   @NotNull
-  private List<Long> idFormacionesMusicales = new ArrayList<>();
+  private Set<Long> idFormacionesMusicales = new HashSet<>();
 }
 

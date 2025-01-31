@@ -22,7 +22,7 @@ public class SalidaProcesionalMapper {
       .nombreHermandad(salidaProcesional.getHermandad().getNombre())
       .numeroNazarenos(salidaProcesional.getNumeroNazarenos())
       .idFormacionesMusicales(salidaProcesional.getFormacionesMusicales()
-        .stream().map(FormacionMusical::getId).collect(Collectors.toList())
+        .stream().map(FormacionMusical::getId).collect(Collectors.toSet())
       )
       .build();
   }
@@ -39,7 +39,7 @@ public class SalidaProcesionalMapper {
       .diaSalida(request.getDiaSalida())
       .hermandad(hermandad)
       .numeroNazarenos(request.getNumeroNazarenos())
-      .formacionesMusicales(formacionesMusicales)
+      .formacionesMusicales(formacionesMusicales.stream().collect(Collectors.toSet()))
       .build();
   }
 }

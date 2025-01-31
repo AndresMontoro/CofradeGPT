@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import es.ca.andresmontoro.backoffice.formaciones_musicales.infrastructure.FormacionMusicalResponse;
+
 @Service
 public class SalidaProcesionalApiCalls {
   
@@ -71,6 +73,18 @@ public class SalidaProcesionalApiCalls {
         HttpStatusCode::isError,
         response -> response.bodyToMono(String.class).map(Exception::new))
       .bodyToMono(SalidaProcesionalResponse.class)
+      .block();
+  }
+
+  public List<FormacionMusicalResponse> findFormacionesByIdSalida(Long idSalida) {
+    return this.webClient.get()
+      .uri(baseUri + "/getFormacionesByIdSalida" + idSalida)
+      .retrieve()
+      .onStatus(
+        HttpStatusCode::isError,
+        response -> response.bodyToMono(String.class).map(Exception::new))
+      .bodyToFlux(FormacionMusicalResponse.class)
+      .collectList()
       .block();
   }
 }
