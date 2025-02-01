@@ -12,6 +12,7 @@
     <module>ai_models</module>
     <module>ai_logs</module>
     <module>backoffice</module>
+    <module>apigateway</module>
   </modules>
   
   <version>1.0-SNAPSHOT</version>
